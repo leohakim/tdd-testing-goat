@@ -7,4 +7,4 @@ func:
 	python manage.py test functional_tests
 
 test:
-	python manage.py test
+	python manage.py test lists
