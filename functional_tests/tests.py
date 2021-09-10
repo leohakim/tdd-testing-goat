@@ -1,11 +1,11 @@
 import time
-import unittest
 
+from django.test import LiveServerTestCase
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 
-class NewVisitorTest(unittest.TestCase):
+class NewVisitorTest(LiveServerTestCase):
 
     def setUp(self) -> None:
         self.browser = webdriver.Firefox()
@@ -21,7 +21,7 @@ class NewVisitorTest(unittest.TestCase):
     def test_can_start_a_list_and_retrieve_it_later(self):
         # Edith has heard about a cool new online to-do app. She goes
         # to check out its homepage
-        self.browser.get("http://localhost:8000")
+        self.browser.get(self.live_server_url)
 
         # She notices the page title and header mention to-do lists
         self.assertIn('To-Do', self.browser.title)
@@ -45,7 +45,6 @@ class NewVisitorTest(unittest.TestCase):
         time.sleep(1)  # Explicit wait
         self.check_for_row_in_list_table('1: Buy peacock feathers')
 
-
         # There is still a text box inviting her to add another item. She
         # enters "Use peacock feathers to make fly" (Edith is very methodical)
         inputbox = self.browser.find_element_by_id('id_new_item')
@@ -65,9 +64,3 @@ class NewVisitorTest(unittest.TestCase):
         # She visitis that URL - her to-do list is still there.
 
         # Satisfied, she goes back to sleep
-
-
-if __name__ == '__main__':
-    # launches the unittest test runner, which will automatically find test classes and methods
-    # in the file and run them.
-    unittest.main(warnings='ignore')

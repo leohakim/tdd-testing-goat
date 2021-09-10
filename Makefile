@@ -4,7 +4,7 @@ run:
 	python manage.py runserver
 
 func:
-	python functional_tests.py
+	python manage.py test functional_tests
 
 test:
 	python manage.py test
